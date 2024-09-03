@@ -1,7 +1,8 @@
 # how to install 
 
-download the zip file in releses (comming soon)
-and install it with arduinoIDE
+download the zip file in releses
+and install it with arduinoIDE.
+Then it can be included with `#include <SimpleCLI.h>` into a project
 
 # documentation
 
