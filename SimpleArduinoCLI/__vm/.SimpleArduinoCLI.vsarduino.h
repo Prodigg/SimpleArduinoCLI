@@ -6,7 +6,7 @@
 			All non-arduino files created by visual micro and all visual studio project or solution files can be freely deleted and are not required to compile a sketch (do not delete your own code!).
 			Note: debugger breakpoints are stored in '.sln' or '.asln' files, knowledge of last uploaded breakpoints is stored in the upload.vmps.xml file. Both files are required to continue a previous debug session without needing to compile and upload again
 	
-	Hardware: Raspberry Pi Pico(pico), Platform=mbed_rp2040, Package=arduino
+	Hardware: Arduino Uno (uno), Platform=avr, Package=arduino
 */
 
 #if defined(_VMICRO_INTELLISENSE)
@@ -14,11 +14,7 @@
 #ifndef _VSARDUINO_H_
 #define _VSARDUINO_H_
 #include <arduino.h>
-#include <mbed_config.h> 
-#include <pinmode_arduino.h> 
 #include <pins_arduino.h> 
-#include <double_tap_usb_boot.cpp> 
-#include <variant.cpp> 
 #include "..\SimpleArduinoCLI.ino"
 #endif
 #endif

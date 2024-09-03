@@ -1,3 +1,14 @@
+/*
+* Licence:
+* THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,
+* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+* OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+* NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+* HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+* WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+* OTHER DEALINGS IN THE SOFTWARE.
+*/
 
 #ifndef __SIMPLE_CLI_H__
 #define __SIMPLE_CLI_H__
@@ -23,44 +34,6 @@ struct CLIOption {
 	{
 	}
 };
-
-namespace SchreiBoxCLIInternal {
-#ifndef SIMPLE_CLI_LOW_MEM
-	String WelcomeBanner = R""""(
-
- _____ _                 _        _____  _     _____ 
-/  ___(_)               | |      /  __ \| |   |_   _|
-\ `--. _ _ __ ___  _ __ | | ___  | /  \/| |     | |  
- `--. \ | '_ ` _ \| '_ \| |/ _ \ | |    | |     | |  
-/\__/ / | | | | | | |_) | |  __/ | \__/\| |_____| |_ 
-\____/|_|_| |_| |_| .__/|_|\___|  \____/\_____/\___/ 
-                  | |                                
-                  |_|                               
-                                                                     
-                                                                    
-
-		)"""";
-
-	String GoodBye = R""""(
-
-
- _____                 _ _                
-|  __ \               | | |               
-| |  \/ ___   ___   __| | |__  _   _  ___ 
-| | __ / _ \ / _ \ / _` | '_ \| | | |/ _ \
-| |_\ \ (_) | (_) | (_| | |_) | |_| |  __/
- \____/\___/ \___/ \__,_|_.__/ \__, |\___|
-                                __/ |     
-                               |___/      
-
-		)"""";
-#else
-	//String GoodBye = "Goodbye"; //  TODO: find out why dis doesn't work
-	//String WelcomeBanner = "Simple CLI";
-#endif // SIMPLE_CLI_MIN_MEM
-
-
-}
 
 class SimpleCLI {
 public:
