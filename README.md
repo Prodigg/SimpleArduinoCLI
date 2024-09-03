@@ -51,7 +51,7 @@ CLI.setCycleFunction(CycleFunction);
 ```
 the Argument is a Function ptr (void(*CycleFunction)())
 
-To start or stopp the CycleFunction feater use the following Function: 
+To start or stop the CycleFunction feater use the following Function: 
 ```
 CLI.activateCycleFunction(avtive);
 ```
