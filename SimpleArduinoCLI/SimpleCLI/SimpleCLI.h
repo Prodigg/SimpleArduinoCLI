@@ -18,7 +18,7 @@ struct CLIOption {
 };
 
 namespace SchreiBoxCLIInternal {
-#ifndef SIMPLE_CLI_MIN_MEM
+#ifndef SIMPLE_CLI_LOW_MEM
 
 
 
