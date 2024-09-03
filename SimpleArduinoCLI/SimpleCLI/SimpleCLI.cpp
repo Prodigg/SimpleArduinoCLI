@@ -4,7 +4,6 @@
 /// checks if the CLI should be started. WARNING: programm execution remains in this function until CLI  is exited.
 /// </summary>
 void SimpleCLI::checkCLI() {
-	using namespace SchreiBoxCLIInternal;
 	// if something was sent CLI activates
 	if (serial->available()) {
 		CLIActive = true;
@@ -15,7 +14,7 @@ void SimpleCLI::checkCLI() {
 
 	serial->println("Welcome to: ");
 	delay(500);
-	serial->print(WelcomeBanner);
+	serial->print(SchreiBoxCLIInternal::WelcomeBanner);
 	delay(1000);
 	serial->println();
 	// CLI Loop
@@ -37,7 +36,7 @@ void SimpleCLI::checkCLI() {
 	delay(500);
 	serial->println("Exited");
 	delay(500);
-	serial->println(GoodBye);
+	serial->println(SchreiBoxCLIInternal::GoodBye);
 	return;
 }
 
@@ -77,6 +76,9 @@ void SimpleCLI::ExecuteCLICommand(String cmd) {
 			serial->println("Done.");
 			return;
 		}
+		else if (cmd.equals("exit")) {
+			SimpleCLI::exitCLIFunc();
+		}
 	}
 	serial->print("ERROR: command not recognised \"");
 	serial->print(cmd);
@@ -109,6 +111,7 @@ void SimpleCLI::CLIPrintCmdOptions() {
 		serial->print(": ");
 		serial->println(CLIOptionArray[i].commandDescription);
 	}
+	serial->println("exit: exits CLI");
 	return;
 }
 

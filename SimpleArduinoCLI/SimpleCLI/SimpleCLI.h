@@ -1,4 +1,6 @@
-#pragma once
+
+#ifndef __SIMPLE_CLI_H__
+#define __SIMPLE_CLI_H__
 #include <Arduino.h>
 /*
 * This file is dedecated for the SchreiBox CLI
@@ -15,14 +17,15 @@ struct CLIOption {
 	String commandDescription = "";
 	String command = "";
 	void(*function)();
+
+	CLIOption(const String& commandDescription, const String& command, void(*function)() )
+		: commandDescription(commandDescription), command(command), function(function)
+	{
+	}
 };
 
 namespace SchreiBoxCLIInternal {
 #ifndef SIMPLE_CLI_LOW_MEM
-
-
-
-
 	String WelcomeBanner = R""""(
 
  _____ _                 _        _____  _     _____ 
@@ -52,9 +55,10 @@ namespace SchreiBoxCLIInternal {
 
 		)"""";
 #else
-	String GoodBye = "Goodbye";
-	String WelcomeBanner = "Simple CLI";
+	//String GoodBye = "Goodbye"; //  TODO: find out why dis doesn't work
+	//String WelcomeBanner = "Simple CLI";
 #endif // SIMPLE_CLI_MIN_MEM
+
 
 }
 
@@ -157,3 +161,4 @@ private:
 
 
 
+#endif // !__SIMPLE_CLI_H
