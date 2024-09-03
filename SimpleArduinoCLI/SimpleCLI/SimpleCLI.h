@@ -29,7 +29,7 @@ struct CLIOption {
 	String command = "";
 	void(*function)();
 
-	CLIOption(const String& commandDescription, const String& command, void(*function)() )
+	CLIOption(String commandDescription, String command, void(*function)() )
 		: commandDescription(commandDescription), command(command), function(function)
 	{
 	}

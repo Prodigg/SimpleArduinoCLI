@@ -13,7 +13,7 @@
 
 namespace SchreiBoxCLIInternal {
 #ifndef SIMPLE_CLI_LOW_MEM
-	String WelcomeBanner = R""""(
+	const String WelcomeBanner = R""""(
 
  _____ _                 _        _____  _     _____ 
 /  ___(_)               | |      /  __ \| |   |_   _|
@@ -28,7 +28,7 @@ namespace SchreiBoxCLIInternal {
 
 		)"""";
 
-	String GoodBye = R""""(
+	const String GoodBye = R""""(
 
 
  _____                 _ _                
@@ -42,8 +42,8 @@ namespace SchreiBoxCLIInternal {
 
 		)"""";
 #else
-	String GoodBye = "Goodbye";
-	String WelcomeBanner = "Simple CLI";
+	const String GoodBye = "Goodbye";
+	const String WelcomeBanner = "Simple CLI";
 #endif // SIMPLE_CLI_MIN_MEM
 
 
@@ -56,6 +56,7 @@ void SimpleCLI::checkCLI() {
 	// if something was sent CLI activates
 	if (serial->available()) {
 		CLIActive = true;
+		delay(10);
 		clearSerial();
 	}
 
@@ -120,6 +121,8 @@ void SimpleCLI::ExecuteCLICommand(String cmd) {
 	for (size_t i = 0; i < CLIOptionArrayLength; i++) {
 		if (CLIOptionArray[i].command.equals(cmd)) {
 			// execute option
+			if (!CLIOptionAvalable(i)) continue;
+
 			serial->println("Executing command...");
 			CLIOptionArray[i].function();
 			serial->println("Done.");
@@ -156,6 +159,8 @@ String SimpleCLI::getString() {
 void SimpleCLI::CLIPrintCmdOptions() {
 	serial->println("Avalable Commands:");
 	for (size_t i = 0; i < CLIOptionArrayLength; i++) {
+		if (!CLIOptionAvalable(i)) continue;
+
 		serial->print(CLIOptionArray[i].command);
 		serial->print(": ");
 		serial->println(CLIOptionArray[i].commandDescription);
