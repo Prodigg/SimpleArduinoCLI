@@ -40,6 +40,12 @@ public:
 	SimpleCLI(HardwareSerial* serial, CLIOption* CLIOptionArray, const uint32_t CLIOptionArrayLength);
 
 	/// <summary>
+	/// disable Defult exit Function. WARNING: if disabled, a new exit function must be defined.
+	/// </summary>
+	/// <param name="disable"></param>
+	void disableDefultExitFN(bool disable);
+
+	/// <summary>
 	/// Disables the Welcome and Goodby sequances
 	/// </summary>
 	/// <param name="disable"></param>
@@ -109,6 +115,8 @@ private:
 	bool areGreetingsEN = true;
 
 	String* customeGreetingString = NULL;
+
+	bool _disableDefultExitFN = false;	// if true, defult Exit function is disabled
 
 	/// <summary>
 	/// Clears serial buffer

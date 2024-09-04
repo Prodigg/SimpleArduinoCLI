@@ -137,7 +137,7 @@ void SimpleCLI::ExecuteCLICommand(String cmd) {
 			serial->println("Done.");
 			return;
 		}
-		else if (cmd.equals("exit")) {
+		else if (cmd.equals("exit") && !_disableDefultExitFN) {
 			SimpleCLI::exitCLIFunc();
 		}
 	}
@@ -174,6 +174,8 @@ void SimpleCLI::CLIPrintCmdOptions() {
 		serial->print(": ");
 		serial->println(CLIOptionArray[i].commandDescription);
 	}
+
+	if (_disableDefultExitFN) return; // return early because defult exit is disabled
 	serial->println("exit: exits CLI");
 	return;
 }
@@ -301,5 +303,14 @@ void SimpleCLI::disableGreetings(bool disable) {
 /// <param name="str"></param>
 void SimpleCLI::setCustomGreetingStr(String* str) {
 	customeGreetingString = str;
+	return;
+}
+
+/// <summary>
+/// disable Defult exit Function. WARNING: if disabled, a new exit function must be defined.
+/// </summary>
+/// <param name="disable"></param>
+void SimpleCLI::disableDefultExitFN(bool disable) {
+	_disableDefultExitFN = disable;
 	return;
 }
