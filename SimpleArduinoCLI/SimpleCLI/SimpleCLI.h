@@ -40,6 +40,18 @@ public:
 	SimpleCLI(HardwareSerial* serial, CLIOption* CLIOptionArray, const uint32_t CLIOptionArrayLength);
 
 	/// <summary>
+	/// Disables the Welcome and Goodby sequances
+	/// </summary>
+	/// <param name="disable"></param>
+	void disableGreetings(bool disable);
+
+	/// <summary>
+	/// Sets a Custome String for greeting
+	/// </summary>
+	/// <param name="str"></param>
+	void setCustomGreetingStr(String* str);
+
+	/// <summary>
 	/// checks if the CLI should be started. WARNING: programm execution remains in this function until CLI  is exited.
 	/// </summary>
 	void checkCLI();
@@ -93,6 +105,10 @@ private:
 
 	bool* ActiveCLIOptions = NULL;	// ptr to array that store what CLI options are active
 	uint32_t ActiveCLIOptionsLength = 0; 
+
+	bool areGreetingsEN = true;
+
+	String* customeGreetingString = NULL;
 
 	/// <summary>
 	/// Clears serial buffer

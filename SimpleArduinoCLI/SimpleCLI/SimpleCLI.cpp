@@ -62,11 +62,18 @@ void SimpleCLI::checkCLI() {
 
 	if (CLIActive == false) return;
 
-	serial->println("Welcome to: ");
-	delay(500);
-	serial->print(SchreiBoxCLIInternal::WelcomeBanner);
-	delay(1000);
-	serial->println();
+	if (areGreetingsEN) {
+		serial->println("Welcome to: ");
+		delay(500);
+		if (customeGreetingString == NULL) {
+			serial->print(SchreiBoxCLIInternal::WelcomeBanner);
+		}
+		else {
+			serial->print(*customeGreetingString);
+		}
+		delay(1000);
+		serial->println();
+	}
 	// CLI Loop
 	while (CLIActive) {
 		serial->println();
@@ -82,11 +89,13 @@ void SimpleCLI::checkCLI() {
 		ExecuteCLICommand(getString());
 	}
 
-	serial->println("Exiting SchreiBox CLI...");
-	delay(500);
-	serial->println("Exited");
-	delay(500);
-	serial->println(SchreiBoxCLIInternal::GoodBye);
+	if (areGreetingsEN) {
+		serial->println("Exiting SchreiBox CLI...");
+		delay(500);
+		serial->println("Exited");
+		delay(500);
+		serial->println(SchreiBoxCLIInternal::GoodBye);
+	}
 	return;
 }
 
@@ -274,5 +283,23 @@ void SimpleCLI::resizeActiveOptionsArray(uint32_t newSize) {
 	delete[] ActiveCLIOptions;
 	ActiveCLIOptionsLength = newSize;
 	ActiveCLIOptions = new bool[newSize];
+	return;
+}
+
+/// <summary>
+/// Disables the Welcome and Goodby sequances
+/// </summary>
+/// <param name="disable"></param>
+void SimpleCLI::disableGreetings(bool disable) {
+	areGreetingsEN = !disable;
+	return; 
+}
+
+/// <summary>
+/// Sets a Custome String for greeting
+/// </summary>
+/// <param name="str"></param>
+void SimpleCLI::setCustomGreetingStr(String* str) {
+	customeGreetingString = str;
 	return;
 }

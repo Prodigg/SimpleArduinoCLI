@@ -1,8 +1,14 @@
 /*
  Name:		SimpleArduinoCLI.ino
  Created:	03.09.2024 22:35:03
- Author:	Raphael
+ Author:	Prodigg
 */
+
+/*
+* This File is a test enviroment for developement. It isn't for examples or anything else.
+*/
+
+
 #define SIMPLE_CLI_LOW_MEM
 
 #include "SimpleCLI/SimpleCLI.h"
