@@ -6,6 +6,11 @@ Then it can be included with `#include <SimpleCLI.h>` into a project
 
 # documentation
 
+## Important
+
+For correct use of the CLI set the Serial settings in the IDE to use a Line Feed.
+If not, SimpleCLI may not work correctly.
+
 ## using SimpleCLI on lower end microcontrollers
 
 When using SimpleCLI on lower end microcontrollers like ArduinoUno memory usage is high. to medagate this use the following line:
@@ -30,7 +35,8 @@ And then initialise the SimpleCLI Object.
 ```
 SimpleCLI CLI(&Serial, CLIOptionArray, CLIOptionArrayLength);
 ```
-> Important is, that the Serial shuld be initialised **before** Initialising the SimpleCLI Object. That means, calling Serial.begin(); before Creating the SimpleCLI Object.
+> Important is, that the Serial shuld be initialised **before** a function call to the CLI is done.
+> If a Function of SimpleCLI is called before the serial is initialised may result in undefined behavior.
 
 After that, checkCLI() should be called as often as possible. 
 
