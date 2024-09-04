@@ -145,6 +145,8 @@ CLI.setCustomGreetingStr(str);
 
 ## exiting SimpleCLI
 
+In SimpleCLI by defult, there is an option to exit the CLI.
+
 To take control of exeting SimpleCLI use `disableDefultExitFN` like so: 
 ```
 CLI.disableDefultExitFN(true);
