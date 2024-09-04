@@ -133,7 +133,7 @@ void SimpleCLI::ExecuteCLICommand(String cmd) {
 			if (!CLIOptionAvalable(i)) continue;
 
 			serial->println("Executing command...");
-			CLIOptionArray[i].function();
+			CLIOptionArray[i].function(this);
 			serial->println("Done.");
 			return;
 		}

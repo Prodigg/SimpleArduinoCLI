@@ -13,17 +13,18 @@
 
 #include "SimpleCLI/SimpleCLI.h"
 
-void Test1Fun() {
+void Test1Fun(void* CLI) {
     Serial.println("Test1Function works");
     delay(10000);
 }
 
-void Test2Fun() {
+void Test2Fun(void* CLI) {
     Serial.println("Test2Function works");
 }
 
-void Test3Fun() {
+void Test3Fun(void* CLI) {
     Serial.println("Test3Function works");
+    static_cast<SimpleCLI*>(CLI); 
 }
 
 void CycleFN() {

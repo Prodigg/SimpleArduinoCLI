@@ -27,9 +27,9 @@ Serial.print(":"); Serial.println(__LINE__);
 struct CLIOption {
 	String commandDescription = "";
 	String command = "";
-	void(*function)();
+	void(*function)(void* CLI);
 
-	CLIOption(String commandDescription, String command, void(*function)() )
+	CLIOption(String commandDescription, String command, void(*function)(void* CLI) )
 		: commandDescription(commandDescription), command(command), function(function)
 	{
 	}
