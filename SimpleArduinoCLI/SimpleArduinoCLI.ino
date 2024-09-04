@@ -5,7 +5,7 @@
 */
 
 /*
-* This File is a test enviroment for developement. It isn't for examples or anything else.
+* This File is a test enviroment for developement and may also function as a Tutorial. (Until i make a proper one ;))
 */
 
 
