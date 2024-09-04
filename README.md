@@ -35,8 +35,8 @@ And then initialise the SimpleCLI Object.
 ```
 SimpleCLI CLI(&Serial, CLIOptionArray, CLIOptionArrayLength);
 ```
-> Important is, that the Serial shuld be initialised **before** a first function call to the CLI is done.
-> If a Function of SimpleCLI is called before the serial is initialised. May result in undefined behavior.
+> Important is, that the Serial shuld be initialised **before** a function call to the CLI is done.
+> If a Function of SimpleCLI is called before the serial is initialised may result in undefined behavior.
 
 After that, checkCLI() should be called as often as possible. 
 
