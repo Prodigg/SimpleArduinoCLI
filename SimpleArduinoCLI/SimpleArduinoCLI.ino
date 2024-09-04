@@ -15,16 +15,21 @@
 
 void Test1Fun(void* CLI) {
     Serial.println("Test1Function works");
-    delay(10000);
+    delay(1000);
 }
 
 void Test2Fun(void* CLI) {
     Serial.println("Test2Function works");
+    static_cast<SimpleCLI*>(CLI)->activateCLIOption(true, "T1");
 }
 
 void Test3Fun(void* CLI) {
     Serial.println("Test3Function works");
-    static_cast<SimpleCLI*>(CLI); 
+    static_cast<SimpleCLI*>(CLI)->activateCLIOption(false, 0);
+}
+
+void exitCLI(void* CLI) {
+    static_cast<SimpleCLI*>(CLI)->exitCLIFunc();
 }
 
 void CycleFN() {
@@ -32,12 +37,13 @@ void CycleFN() {
     delay(10);  // in CycleFunction be carefull with delays
 }
 
-const uint32_t CLIOptionArrayLength = 3;
+const uint32_t CLIOptionArrayLength = 4;
 CLIOption CLIOptionArray[CLIOptionArrayLength] = {
     //  Name               | cmd       | function
     {   "Test1",         "T1",      Test1Fun },
     {   "Test2",         "T2",      Test2Fun },
-    {   "Test3",         "T3",      Test3Fun }
+    {   "Test3",         "T3",      Test3Fun },
+    {   "exits CLI",     "e",       exitCLI  }
 
 };
 
@@ -48,6 +54,7 @@ SimpleCLI CLI(&Serial, CLIOptionArray, CLIOptionArrayLength);
 
 void setup() {
     Serial.begin(115200);
+    CLI.disableDefultExitFN(true);
     //CLI.setCycleFunction(CycleFN);      // set CycleFunction
     //CLI.activateCycleFunction(true);    // Activate CycleFunction
 }

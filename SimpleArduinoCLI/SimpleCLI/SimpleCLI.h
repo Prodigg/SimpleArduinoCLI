@@ -24,6 +24,8 @@ Serial.print(" at "); \
 Serial.print(__FILENAME__); \
 Serial.print(":"); Serial.println(__LINE__);
 
+
+
 struct CLIOption {
 	String commandDescription = "";
 	String command = "";
@@ -33,6 +35,7 @@ struct CLIOption {
 		: commandDescription(commandDescription), command(command), function(function)
 	{
 	}
+
 };
 
 class SimpleCLI {
@@ -63,7 +66,7 @@ public:
 	void checkCLI();
 
 	/// <summary>
-	/// function for exiting SchreiBoxCLI
+	/// function for exiting SimpleCLI
 	/// </summary>
 	void exitCLIFunc();
 
@@ -117,6 +120,18 @@ private:
 	String* customeGreetingString = NULL;
 
 	bool _disableDefultExitFN = false;	// if true, defult Exit function is disabled
+
+	/// <summary>
+	/// Waits for serial input and handels CycleFunction
+	/// </summary>
+	void WaitForInput();
+
+	/// <summary>
+	/// executes CLIOption
+	/// </summary>
+	/// <param name="CLIOptionArray"></param>
+	/// <param name="CLIOptionArrayLenth"></param>
+	void ExecuteOption(CLIOption* Option);
 
 	/// <summary>
 	/// Clears serial buffer

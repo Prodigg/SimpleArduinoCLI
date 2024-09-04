@@ -78,14 +78,12 @@ void SimpleCLI::checkCLI() {
 	while (CLIActive) {
 		serial->println();
 		serial->println();
+
 		CLIPrintCmdOptions();
+
 		serial->println("\nType command: ");
-		do {
-			if (executeEveryCycleActive) {
-				// execute cycleFunction
-				executeEveryCycle();
-			}
-		} while (!serial->available());
+
+		WaitForInput(); // waits for user input
 		ExecuteCLICommand(getString());
 	}
 
@@ -96,6 +94,19 @@ void SimpleCLI::checkCLI() {
 		delay(500);
 		serial->println(SchreiBoxCLIInternal::GoodBye);
 	}
+	return;
+}
+
+/// <summary>
+/// Waits for serial input and handels CycleFunction
+/// </summary>
+void SimpleCLI::WaitForInput() {
+	do {
+		if (executeEveryCycleActive) {
+			// execute cycleFunction
+			executeEveryCycle();
+		}
+	} while (!serial->available());
 	return;
 }
 
@@ -132,18 +143,35 @@ void SimpleCLI::ExecuteCLICommand(String cmd) {
 			// execute option
 			if (!CLIOptionAvalable(i)) continue;
 
-			serial->println("Executing command...");
-			CLIOptionArray[i].function(this);
-			serial->println("Done.");
+			ExecuteOption(&CLIOptionArray[i]);
 			return;
 		}
 		else if (cmd.equals("exit") && !_disableDefultExitFN) {
 			SimpleCLI::exitCLIFunc();
+			return;
 		}
 	}
 	serial->print("ERROR: command not recognised \"");
 	serial->print(cmd);
 	serial->println("\"");
+	return;
+}
+
+/// <summary>
+/// executes CLIOption
+/// </summary>
+/// <param name="CLIOptionArray"></param>
+/// <param name="CLIOptionArrayLenth"></param>
+void SimpleCLI::ExecuteOption(CLIOption* Option) {
+	if (Option->function == NULL) {
+		errorMsg("ERROR: CLIOption has invalid propaties. Ignored");
+		return;
+	}
+
+	// execute
+	serial->println("Executing command...");
+	Option->function(this);
+	serial->println("Done.");
 	return;
 }
 
