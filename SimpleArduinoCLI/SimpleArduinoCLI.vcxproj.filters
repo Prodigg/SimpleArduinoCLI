@@ -24,10 +24,10 @@
     <ClCompile Include="SimpleCLI\SimpleCLI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SimpleCLI\examples\CLI.ino" />
-    <ClCompile Include="SimpleCLI\examples\DisableEnableOptions.ino" />
-    <ClCompile Include="SimpleCLI\examples\CycleFunction.ino" />
-    <ClCompile Include="SimpleCLI\examples\CustomeExit.ino" />
+    <ClCompile Include="SimpleCLI\examples\CLI\CLI.ino" />
+    <ClCompile Include="SimpleCLI\examples\DisableEnableOptions\DisableEnableOptions.ino" />
+    <ClCompile Include="SimpleCLI\examples\CycleFunction\CycleFunction.ino" />
+    <ClCompile Include="SimpleCLI\examples\CustomeExit\CustomeExit.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.SimpleArduinoCLI.vsarduino.h">

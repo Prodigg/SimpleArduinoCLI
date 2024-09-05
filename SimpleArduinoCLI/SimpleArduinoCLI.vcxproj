@@ -87,19 +87,19 @@
     <ClCompile Include="SimpleCLI\SimpleCLI.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SimpleCLI\examples\CLI.ino">
+    <ClCompile Include="SimpleCLI\examples\CLI\CLI.ino">
       <FileType>CppCode</FileType>
       <DeploymentContent>true</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="SimpleCLI\examples\DisableEnableOptions.ino">
+    <ClCompile Include="SimpleCLI\examples\DisableEnableOptions\DisableEnableOptions.ino">
       <FileType>CppCode</FileType>
       <DeploymentContent>true</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="SimpleCLI\examples\CycleFunction.ino">
+    <ClCompile Include="SimpleCLI\examples\CycleFunction\CycleFunction.ino">
       <FileType>CppCode</FileType>
       <DeploymentContent>true</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="SimpleCLI\examples\CustomeExit.ino">
+    <ClCompile Include="SimpleCLI\examples\CustomeExit\CustomeExit.ino">
       <FileType>CppCode</FileType>
       <DeploymentContent>true</DeploymentContent>
     </ClCompile>
