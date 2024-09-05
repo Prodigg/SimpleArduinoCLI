@@ -192,7 +192,12 @@ void SimpleCLI::updateCLIOptions(CLIOption* CLIOptionArray, const uint32_t CLIOp
 	SimpleCLI::CLIOptionArray = CLIOptionArray;
 	SimpleCLI::CLIOptionArrayLength = CLIOptionArrayLength;
 
-	resizeActiveOptionsArray(CLIOptionArrayLength);
+	// init ActiveCLIOptions
+	ActiveCLIOptionsLength = CLIOptionArrayLength;
+	ActiveCLIOptions = new bool[CLIOptionArrayLength];
+	for (size_t i = 0; i < CLIOptionArrayLength; i++) {
+		ActiveCLIOptions[i] = true;
+	}
 	return;
 }
 
@@ -259,7 +264,6 @@ void SimpleCLI::activateCLIOption(bool active, int numberOfOption) {
 /// <param name="active"></param>
 /// <param name="commandOfOption"></param>
 void SimpleCLI::activateCLIOption(bool active, String commandOfOption) {
-	serial->println("Feature: \ndisableing options\" disabled due to no mem alloc");
 	// search for option
 	for (size_t i = 0; i < CLIOptionArrayLength; i++) {
 		if (CLIOptionArray[i].command.equals(commandOfOption)) {
