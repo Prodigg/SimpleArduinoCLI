@@ -60,8 +60,8 @@ namespace SchreiBoxCLIInternal {
 
 		)"""";
 #else
-	const String GoodBye = "Goodbye";
-	const String WelcomeBanner = "Simple CLI";
+	const String GoodBye = "";
+	const String WelcomeBanner = "";
 #endif // SIMPLE_CLI_MIN_MEM
 }
 

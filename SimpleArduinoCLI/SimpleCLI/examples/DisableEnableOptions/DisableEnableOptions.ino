@@ -22,11 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-/*
-* This File is a test enviroment for developement and may also function as a Tutorial. (Until i make a proper one ;))
-*/
-
-
 #define SIMPLE_CLI_LOW_MEM      // for devices like arduino Uno where memory is a low resorce
 
 
@@ -46,7 +41,7 @@ void DeactivateF1(void* CLI) {
     static_cast<SimpleCLI*>(CLI)->activateCLIOption(false, 0);      // you can use the command string or option index
 }
 
-const uint32_t CLIOptionArrayLength = 4;
+const uint32_t CLIOptionArrayLength = 3;
 CLIOption CLIOptionArray[CLIOptionArrayLength] = {
     //  Name               | cmd       | function
     {   "Function1",         "F1",      Function1 },

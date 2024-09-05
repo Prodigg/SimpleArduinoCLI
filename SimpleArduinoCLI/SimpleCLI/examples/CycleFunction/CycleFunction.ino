@@ -22,10 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-/*
-* This File is a test enviroment for developement and may also function as a Tutorial. (Until i make a proper one ;))
-*/
-
 
 #define SIMPLE_CLI_LOW_MEM      // for devices like arduino Uno where memory is a low resorce
 
@@ -39,7 +35,7 @@ void ActivateCycleFN(void* CLI) {
 
 void DeactivateCycleFN(void* CLI) {
     Serial.println("Deactivate CycleFunction");
-    static_cast<SimpleCLI*>(CLI)->activateCycleFunction(false) // deactivate CycleFunction
+    static_cast<SimpleCLI*>(CLI)->activateCycleFunction(false); // deactivate CycleFunction
 }
 
 const uint32_t CLIOptionArrayLength = 2;

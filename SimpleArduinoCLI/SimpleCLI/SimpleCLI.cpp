@@ -41,7 +41,13 @@ void SimpleCLI::checkCLI() {
 		serial->println("Welcome to: ");
 		delay(500);
 		if (customeGreetingString == NULL) {
+#ifdef SIMPLE_CLI_LOW_MEM
+			serial->println("SimpleCLI");
+#else
 			serial->print(SchreiBoxCLIInternal::WelcomeBanner);
+#endif // SIMPLE_CLI_LOW_MEM
+
+			
 		}
 		else {
 			serial->print(*customeGreetingString);

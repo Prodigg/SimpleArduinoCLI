@@ -36,6 +36,7 @@ void Function2(void* CLI) {
 }
 
 void exitCLI(void* CLI) {
+    Serial.println("Executing exit Function");
     static_cast<SimpleCLI*>(CLI)->exitCLIFunc();
 }
 
@@ -55,7 +56,7 @@ SimpleCLI CLI(&Serial, CLIOptionArray, CLIOptionArrayLength);
 
 void setup() {
     Serial.begin(115200);
-    CLI.disableDefultExitFN();  // disables defult exit function
+    CLI.disableDefultExitFN(true);  // disables defult exit function
 }
 
 void loop() {
