@@ -11,43 +11,6 @@
 */
 #include "SimpleCLI.h"
 
-namespace SchreiBoxCLIInternal {
-#ifndef SIMPLE_CLI_LOW_MEM
-	const String WelcomeBanner = R""""(
-
- _____ _                 _        _____  _     _____ 
-/  ___(_)               | |      /  __ \| |   |_   _|
-\ `--. _ _ __ ___  _ __ | | ___  | /  \/| |     | |  
- `--. \ | '_ ` _ \| '_ \| |/ _ \ | |    | |     | |  
-/\__/ / | | | | | | |_) | |  __/ | \__/\| |_____| |_ 
-\____/|_|_| |_| |_| .__/|_|\___|  \____/\_____/\___/ 
-                  | |                                
-                  |_|                               
-                                                                     
-                                                                    
-
-		)"""";
-
-	const String GoodBye = R""""(
-
-
- _____                 _ _                
-|  __ \               | | |               
-| |  \/ ___   ___   __| | |__  _   _  ___ 
-| | __ / _ \ / _ \ / _` | '_ \| | | |/ _ \
-| |_\ \ (_) | (_) | (_| | |_) | |_| |  __/
- \____/\___/ \___/ \__,_|_.__/ \__, |\___|
-                                __/ |     
-                               |___/      
-
-		)"""";
-#else
-	const String GoodBye = "Goodbye";
-	const String WelcomeBanner = "Simple CLI";
-#endif // SIMPLE_CLI_MIN_MEM
-
-
-}
 
 /// <summary>
 /// checks if the CLI should be started. WARNING: programm execution remains in this function until CLI  is exited.
@@ -217,6 +180,9 @@ void SimpleCLI::updateCLIOptions(CLIOption* CLIOptionArray, const uint32_t CLIOp
 	SimpleCLI::CLIOptionArray = CLIOptionArray;
 	SimpleCLI::CLIOptionArrayLength = CLIOptionArrayLength;
 
+#ifndef SIMPLE_CLI_NO_DYNAMIC_MEM_ALLOC
+	resizeActiveOptionsArray(CLIOptionArrayLength);
+#endif
 	return;
 }
 
@@ -252,13 +218,20 @@ bool SimpleCLI::activateCycleFunction(bool activate) {
 /// <param name="OptionNumber"></param>
 /// <returns></returns>
 bool SimpleCLI::CLIOptionAvalable(int OptionNumber) {
+	
+#ifdef SIMPLE_CLI_NO_DYNAMIC_MEM_ALLOC
+	return true;
+#else
+
 	if (OptionNumber >= ActiveCLIOptionsLength || OptionNumber < 0) {
 		// error CLIOption out of bounds
 		errorMsg("ERROR: Array access out of bounds");
 		return false;
 	}
 	return ActiveCLIOptions[OptionNumber];
+#endif
 }
+
 
 /// <summary>
 /// activates or deactivates CLI option
@@ -266,13 +239,17 @@ bool SimpleCLI::CLIOptionAvalable(int OptionNumber) {
 /// <param name="active"></param>
 /// <param name="numberOfOption"></param>
 void SimpleCLI::activateCLIOption(bool active, int numberOfOption) {
+#ifdef SIMPLE_CLI_NO_DYNAMIC_MEM_ALLOC
+	serial->println("Feature: \ndisableing options\" disabled due to no mem alloc");
+#else
+
 	if (numberOfOption >= ActiveCLIOptionsLength || numberOfOption < 0) {
 		// error CLIOption out of bounds
 		errorMsg("ERROR: Array access out of bounds");
 		return;
 	}
 	ActiveCLIOptions[numberOfOption] = active;
-
+#endif
 }
 
 /// <summary>
@@ -281,6 +258,9 @@ void SimpleCLI::activateCLIOption(bool active, int numberOfOption) {
 /// <param name="active"></param>
 /// <param name="commandOfOption"></param>
 void SimpleCLI::activateCLIOption(bool active, String commandOfOption) {
+#ifdef SIMPLE_CLI_NO_DYNAMIC_MEM_ALLOC
+	serial->println("Feature: \ndisableing options\" disabled due to no mem alloc");
+#else
 	// search for option
 	for (size_t i = 0; i < CLIOptionArrayLength; i++) {
 		if (CLIOptionArray[i].command.equals(commandOfOption)) {
@@ -290,19 +270,21 @@ void SimpleCLI::activateCLIOption(bool active, String commandOfOption) {
 	}
 	errorMsg("ERROR: CLI option not found");
 	return;
+#endif
 }
 
 SimpleCLI::SimpleCLI(HardwareSerial* serial, CLIOption* CLIOptionArray, const uint32_t CLIOptionArrayLength) :
 	serial(serial),
 	CLIOptionArray(CLIOptionArray),
 	CLIOptionArrayLength(CLIOptionArrayLength) {
-
+#ifndef SIMPLE_CLI_NO_DYNAMIC_MEM_ALLOC
 	// init ActiveCLIOptions
 	ActiveCLIOptionsLength = CLIOptionArrayLength;
 	ActiveCLIOptions = new bool[CLIOptionArrayLength];
 	for (size_t i = 0; i < CLIOptionArrayLength; i++) {
 		ActiveCLIOptions[i] = true;
 	}
+#endif
 }
 
 /// <summary>
@@ -310,10 +292,15 @@ SimpleCLI::SimpleCLI(HardwareSerial* serial, CLIOption* CLIOptionArray, const ui
 /// </summary>
 /// <param name="newSize"></param>
 void SimpleCLI::resizeActiveOptionsArray(uint32_t newSize) {
+#ifdef SIMPLE_CLI_NO_DYNAMIC_MEM_ALLOC
+	errorMsg("Failed to resize Array due to no mem alloc");
+#else
+
 	delete[] ActiveCLIOptions;
 	ActiveCLIOptionsLength = newSize;
 	ActiveCLIOptions = new bool[newSize];
 	return;
+#endif // SIMPLE_CLI_NO_DYNAMIC_MEM_ALLOC
 }
 
 /// <summary>
