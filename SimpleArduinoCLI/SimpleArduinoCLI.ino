@@ -10,7 +10,6 @@
 
 
 #define SIMPLE_CLI_LOW_MEM
-#define SIMPLE_CLI_NO_DYNAMIC_MEM_ALLOC
 
 
 #include "SimpleCLI/SimpleCLI.h"

@@ -51,7 +51,7 @@ void SimpleCLI::checkCLI() {
 	}
 
 	if (areGreetingsEN) {
-		serial->println("Exiting SchreiBox CLI...");
+		serial->println("Exiting SimpleCLI...");
 		delay(500);
 		serial->println("Exited");
 		delay(500);
@@ -180,9 +180,7 @@ void SimpleCLI::updateCLIOptions(CLIOption* CLIOptionArray, const uint32_t CLIOp
 	SimpleCLI::CLIOptionArray = CLIOptionArray;
 	SimpleCLI::CLIOptionArrayLength = CLIOptionArrayLength;
 
-#ifndef SIMPLE_CLI_NO_DYNAMIC_MEM_ALLOC
 	resizeActiveOptionsArray(CLIOptionArrayLength);
-#endif
 	return;
 }
 
@@ -218,10 +216,6 @@ bool SimpleCLI::activateCycleFunction(bool activate) {
 /// <param name="OptionNumber"></param>
 /// <returns></returns>
 bool SimpleCLI::CLIOptionAvalable(int OptionNumber) {
-	
-#ifdef SIMPLE_CLI_NO_DYNAMIC_MEM_ALLOC
-	return true;
-#else
 
 	if (OptionNumber >= ActiveCLIOptionsLength || OptionNumber < 0) {
 		// error CLIOption out of bounds
@@ -229,7 +223,6 @@ bool SimpleCLI::CLIOptionAvalable(int OptionNumber) {
 		return false;
 	}
 	return ActiveCLIOptions[OptionNumber];
-#endif
 }
 
 
@@ -239,9 +232,6 @@ bool SimpleCLI::CLIOptionAvalable(int OptionNumber) {
 /// <param name="active"></param>
 /// <param name="numberOfOption"></param>
 void SimpleCLI::activateCLIOption(bool active, int numberOfOption) {
-#ifdef SIMPLE_CLI_NO_DYNAMIC_MEM_ALLOC
-	serial->println("Feature: \ndisableing options\" disabled due to no mem alloc");
-#else
 
 	if (numberOfOption >= ActiveCLIOptionsLength || numberOfOption < 0) {
 		// error CLIOption out of bounds
@@ -249,7 +239,6 @@ void SimpleCLI::activateCLIOption(bool active, int numberOfOption) {
 		return;
 	}
 	ActiveCLIOptions[numberOfOption] = active;
-#endif
 }
 
 /// <summary>
@@ -258,9 +247,7 @@ void SimpleCLI::activateCLIOption(bool active, int numberOfOption) {
 /// <param name="active"></param>
 /// <param name="commandOfOption"></param>
 void SimpleCLI::activateCLIOption(bool active, String commandOfOption) {
-#ifdef SIMPLE_CLI_NO_DYNAMIC_MEM_ALLOC
 	serial->println("Feature: \ndisableing options\" disabled due to no mem alloc");
-#else
 	// search for option
 	for (size_t i = 0; i < CLIOptionArrayLength; i++) {
 		if (CLIOptionArray[i].command.equals(commandOfOption)) {
@@ -270,21 +257,14 @@ void SimpleCLI::activateCLIOption(bool active, String commandOfOption) {
 	}
 	errorMsg("ERROR: CLI option not found");
 	return;
-#endif
 }
 
 SimpleCLI::SimpleCLI(HardwareSerial* serial, CLIOption* CLIOptionArray, const uint32_t CLIOptionArrayLength) :
 	serial(serial),
 	CLIOptionArray(CLIOptionArray),
 	CLIOptionArrayLength(CLIOptionArrayLength) {
-#ifndef SIMPLE_CLI_NO_DYNAMIC_MEM_ALLOC
 	// init ActiveCLIOptions
-	ActiveCLIOptionsLength = CLIOptionArrayLength;
-	ActiveCLIOptions = new bool[CLIOptionArrayLength];
-	for (size_t i = 0; i < CLIOptionArrayLength; i++) {
-		ActiveCLIOptions[i] = true;
-	}
-#endif
+	resizeActiveOptionsArray(CLIOptionArrayLength);
 }
 
 /// <summary>
@@ -292,15 +272,14 @@ SimpleCLI::SimpleCLI(HardwareSerial* serial, CLIOption* CLIOptionArray, const ui
 /// </summary>
 /// <param name="newSize"></param>
 void SimpleCLI::resizeActiveOptionsArray(uint32_t newSize) {
-#ifdef SIMPLE_CLI_NO_DYNAMIC_MEM_ALLOC
-	errorMsg("Failed to resize Array due to no mem alloc");
-#else
 
 	delete[] ActiveCLIOptions;
 	ActiveCLIOptionsLength = newSize;
 	ActiveCLIOptions = new bool[newSize];
+	for (size_t i = 0; i < CLIOptionArrayLength; i++) {
+		ActiveCLIOptions[i] = true;
+	}
 	return;
-#endif // SIMPLE_CLI_NO_DYNAMIC_MEM_ALLOC
 }
 
 /// <summary>
