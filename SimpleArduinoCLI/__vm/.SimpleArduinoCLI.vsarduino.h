@@ -16,5 +16,9 @@
 #include <arduino.h>
 #include <pins_arduino.h> 
 #include "..\SimpleArduinoCLI.ino"
+#include "..\SimpleCLI\examples\CLI.ino"
+#include "..\SimpleCLI\examples\CustomeExit.ino"
+#include "..\SimpleCLI\examples\CycleFunction.ino"
+#include "..\SimpleCLI\examples\DisableEnableOptions.ino"
 #endif
 #endif
