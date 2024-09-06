@@ -15,14 +15,6 @@ Further examples are in the Arduino Libary. These can be accessed via. the examp
 For correct use of the CLI set the Serial settings in the IDE to use a Line Feed, New Line or both.
 If not, SimpleCLI may not work correctly.
 
-## using SimpleCLI on lower end microcontrollers
-
-When using SimpleCLI on lower end microcontrollers like ArduinoUno memory usage is high. to medagate this use the following line:
-```
-#define SIMPLE_CLI_LOW_MEM
-```
-This strips down unnessesary data that is used for appearance.
-
 ## quick setup
 
 After installing and including the Libary initialise the SimpleCLI Options like so:
@@ -37,10 +29,11 @@ CLIOption CLIOptionArray[CLIOptionArrayLength] = {
 ```
 And then initialise the SimpleCLI Object.
 ```
-SimpleCLI CLI(&Serial, CLIOptionArray, CLIOptionArrayLength);
+SimpleCLI CLI;
+CLI.begin(&Serial, CLIOptionArray, CLIOptionArrayLength);
 ```
-> Important is, that the Serial should be initialised **before** a function call to the CLI is done.
-> If a Function of SimpleCLI is called before the serial is initialised may result in undefined behavior.
+> Important is, that the Serial should be initialised and the Function `CLI.begin` should be called **before** a function call to the CLI is done.
+> If a Function of SimpleCLI is called before the serial is initialised or before `CLI.begin` is called can lead to undefined behavior in the SimpleCLI libary.
 
 After that, `checkCLI()` should be called as often as possible. 
 
