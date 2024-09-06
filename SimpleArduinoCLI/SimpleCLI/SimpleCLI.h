@@ -88,7 +88,7 @@ struct CLIOption {
 
 class SimpleCLI {
 public:
-	SimpleCLI(HardwareSerial* serial, CLIOption* CLIOptionArray, const uint32_t CLIOptionArrayLength);
+	SimpleCLI(Stream* serial, CLIOption* CLIOptionArray, const uint32_t CLIOptionArrayLength);
 
 	/// <summary>
 	/// disable Defult exit Function. WARNING: if disabled, a new exit function must be defined.
@@ -154,7 +154,7 @@ public:
 
 private:
 	bool CLIActive = false; // true if CLI active
-	HardwareSerial* serial; 
+	Stream* serial; 
 	CLIOption* CLIOptionArray;
 	uint32_t CLIOptionArrayLength = 0;
 	void(*executeEveryCycle)() = NULL;	// ptr to CycleFunction
