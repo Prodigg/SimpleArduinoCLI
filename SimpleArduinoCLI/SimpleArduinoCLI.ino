@@ -69,7 +69,7 @@ SimpleCLI CLI(&Serial, CLIOptionArray, CLIOptionArrayLength);
 
 void setup() {
     Serial.begin(115200);
-    CLI.disableDefultExitFN(true);
+    CLI.disableDefaultExitFN(true);
     //CLI.setCycleFunction(CycleFN);      // set CycleFunction
     //CLI.activateCycleFunction(true);    // Activate CycleFunction
 }

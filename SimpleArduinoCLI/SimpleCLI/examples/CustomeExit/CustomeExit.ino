@@ -51,7 +51,7 @@ SimpleCLI CLI;
 void setup() {
     Serial.begin(115200);
     CLI.begin(&Serial, CLIOptionArray, CLIOptionArrayLength);
-    CLI.disableDefultExitFN(true);  // disables defult exit function
+    CLI.disableDefaultExitFN(true);  // disables defult exit function
 }
 
 void loop() {

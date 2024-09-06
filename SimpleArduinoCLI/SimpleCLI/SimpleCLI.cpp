@@ -321,7 +321,7 @@ void SimpleCLI::setCustomGreetingStr(String* str) {
 /// disable Defult exit Function. WARNING: if disabled, a new exit function must be defined.
 /// </summary>
 /// <param name="disable"></param>
-void SimpleCLI::disableDefultExitFN(bool disable) {
+void SimpleCLI::disableDefaultExitFN(bool disable) {
 	_disableDefultExitFN = disable;
 	return;
 }

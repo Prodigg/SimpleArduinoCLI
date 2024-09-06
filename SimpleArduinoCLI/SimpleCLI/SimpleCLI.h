@@ -58,7 +58,7 @@ public:
 	/// disable Defult exit Function. WARNING: if disabled, a new exit function must be defined.
 	/// </summary>
 	/// <param name="disable"></param>
-	void disableDefultExitFN(bool disable);
+	void disableDefaultExitFN(bool disable);
 
 	/// <summary>
 	/// Disables the Welcome and Goodby sequances
