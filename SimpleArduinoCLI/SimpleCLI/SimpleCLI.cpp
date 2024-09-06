@@ -281,7 +281,7 @@ void SimpleCLI::activateCLIOption(bool active, String commandOfOption) {
 	return;
 }
 
-SimpleCLI::SimpleCLI(HardwareSerial* serial, CLIOption* CLIOptionArray, const uint32_t CLIOptionArrayLength) :
+SimpleCLI::SimpleCLI(Stream* serial, CLIOption* CLIOptionArray, const uint32_t CLIOptionArrayLength) :
 	serial(serial),
 	CLIOptionArray(CLIOptionArray),
 	CLIOptionArrayLength(CLIOptionArrayLength) {
