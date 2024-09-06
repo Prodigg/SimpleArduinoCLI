@@ -6,11 +6,13 @@ Then it can be included with `#include <SimpleCLI.h>` into a project
 
 # Documentation
 
-For examples, the SimpleCLI object is called `CLI` but any other name may be used.
+In this Documentation, the SimpleCLI object is called `CLI` but any other name may be used.
+
+Further examples are in the Arduino Libary. These can be accessed via. the examples in the ArduinoIDE.
 
 ## Important
 
-For correct use of the CLI set the Serial settings in the IDE to use a Line Feed.
+For correct use of the CLI set the Serial settings in the IDE to use a Line Feed, New Line or both.
 If not, SimpleCLI may not work correctly.
 
 ## using SimpleCLI on lower end microcontrollers
@@ -37,7 +39,7 @@ And then initialise the SimpleCLI Object.
 ```
 SimpleCLI CLI(&Serial, CLIOptionArray, CLIOptionArrayLength);
 ```
-> Important is, that the Serial shuld be initialised **before** a function call to the CLI is done.
+> Important is, that the Serial should be initialised **before** a function call to the CLI is done.
 > If a Function of SimpleCLI is called before the serial is initialised may result in undefined behavior.
 
 After that, `checkCLI()` should be called as often as possible. 
@@ -50,7 +52,7 @@ The CLI runns until the CLI is exited. In that time the Regular programm is **NO
 ## SimpleCLI Options
 
 In SimpleCLI every function you can execute vis SimpleCLI is a so called Option. These Options are stored in an CLIOption array. 
-An definistion of sutch an array may look like this: 
+An definition of such an array may look like this: 
 ```
 const uint32_t CLIOptionArrayLength = 3;
 CLIOption CLIOptionArray[CLIOptionArrayLength] = {
