@@ -6,7 +6,9 @@ Then it can be included with `#include <SimpleCLI.h>` into a project
 
 # Documentation
 
-For examples, the SimpleCLI object is called `CLI` but any other name may be used.
+In this Documentation, the SimpleCLI object is called `CLI` but any other name may be used.
+
+Further examples are in the Arduino Libary. These can be accessed via. the examples in the ArduinoIDE.
 
 ## Important
 
