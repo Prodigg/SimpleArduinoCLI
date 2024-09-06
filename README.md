@@ -10,7 +10,7 @@ For examples, the SimpleCLI object is called `CLI` but any other name may be use
 
 ## Important
 
-For correct use of the CLI set the Serial settings in the IDE to use a Line Feed.
+For correct use of the CLI set the Serial settings in the IDE to use a Line Feed, New Line or both.
 If not, SimpleCLI may not work correctly.
 
 ## using SimpleCLI on lower end microcontrollers
