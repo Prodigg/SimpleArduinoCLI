@@ -26,10 +26,6 @@ SOFTWARE.
 * This File is a test enviroment for developement and may also function as a Tutorial. (Until i make a proper one ;))
 */
 
-
-#define SIMPLE_CLI_LOW_MEM
-
-
 #include "SimpleCLI/SimpleCLI.h"
 
 void Test1Fun(void* CLI) {

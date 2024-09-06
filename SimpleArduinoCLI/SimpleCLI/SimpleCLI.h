@@ -29,42 +29,6 @@ SOFTWARE.
 * This file is dedecated for the SchreiBox CLI
 */
 
-namespace SchreiBoxCLIInternal {
-#ifndef SIMPLE_CLI_LOW_MEM
-	const String WelcomeBanner = R""""(
-
- _____ _                 _        _____  _     _____ 
-/  ___(_)               | |      /  __ \| |   |_   _|
-\ `--. _ _ __ ___  _ __ | | ___  | /  \/| |     | |  
- `--. \ | '_ ` _ \| '_ \| |/ _ \ | |    | |     | |  
-/\__/ / | | | | | | |_) | |  __/ | \__/\| |_____| |_ 
-\____/|_|_| |_| |_| .__/|_|\___|  \____/\_____/\___/ 
-                  | |                                
-                  |_|                               
-                                                                     
-                                                                    
-
-		)"""";
-
-	const String GoodBye = R""""(
-
-
- _____                 _ _                
-|  __ \               | | |               
-| |  \/ ___   ___   __| | |__  _   _  ___ 
-| | __ / _ \ / _ \ / _` | '_ \| | | |/ _ \
-| |_\ \ (_) | (_) | (_| | |_) | |_| |  __/
- \____/\___/ \___/ \__,_|_.__/ \__, |\___|
-                                __/ |     
-                               |___/      
-
-		)"""";
-#else
-	const String GoodBye = "";
-	const String WelcomeBanner = "";
-#endif // SIMPLE_CLI_MIN_MEM
-}
-
 // for reporting events to serial with File and line
 #define __FILENAME__ (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
 #define errorMsg(messgage) Serial.print(messgage); \
@@ -88,7 +52,7 @@ struct CLIOption {
 
 class SimpleCLI {
 public:
-	SimpleCLI(HardwareSerial* serial, CLIOption* CLIOptionArray, const uint32_t CLIOptionArrayLength);
+	void begin(Stream* serial, CLIOption* CLIOptionArray, const uint32_t CLIOptionArrayLength);
 
 	/// <summary>
 	/// disable Defult exit Function. WARNING: if disabled, a new exit function must be defined.
@@ -154,7 +118,7 @@ public:
 
 private:
 	bool CLIActive = false; // true if CLI active
-	HardwareSerial* serial; 
+	Stream* serial; 
 	CLIOption* CLIOptionArray;
 	uint32_t CLIOptionArrayLength = 0;
 	void(*executeEveryCycle)() = NULL;	// ptr to CycleFunction

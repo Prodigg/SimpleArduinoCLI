@@ -22,10 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-
-#define SIMPLE_CLI_LOW_MEM      // for devices like arduino Uno where memory is a low resorce
-
-
 #include "SimpleCLI.h"
 
 void ActivateCycleFN(void* CLI) {
@@ -51,13 +47,12 @@ void CycleFN() {
     delay(10);      // be carefull with delays in Cycle Function
 }
 
-SimpleCLI CLI(&Serial, CLIOptionArray, CLIOptionArrayLength);
-
-
+SimpleCLI CLI;
 
 void setup() {
     Serial.begin(115200);
     CLI.setCycleFunction(CycleFN);      // set CycleFunction
+    CLI.begin(&Serial, CLIOptionArray, CLIOptionArrayLength);
 }
 
 void loop() {

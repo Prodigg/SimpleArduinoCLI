@@ -41,13 +41,7 @@ void SimpleCLI::checkCLI() {
 		serial->println("Welcome to: ");
 		delay(500);
 		if (customeGreetingString == NULL) {
-#ifdef SIMPLE_CLI_LOW_MEM
 			serial->println("SimpleCLI");
-#else
-			serial->print(SchreiBoxCLIInternal::WelcomeBanner);
-#endif // SIMPLE_CLI_LOW_MEM
-
-			
 		}
 		else {
 			serial->print(*customeGreetingString);
@@ -73,7 +67,7 @@ void SimpleCLI::checkCLI() {
 		delay(500);
 		serial->println("Exited");
 		delay(500);
-		serial->println(SchreiBoxCLIInternal::GoodBye);
+		serial->println("Goodbye");
 	}
 	return;
 }
@@ -281,11 +275,12 @@ void SimpleCLI::activateCLIOption(bool active, String commandOfOption) {
 	return;
 }
 
-SimpleCLI::SimpleCLI(HardwareSerial* serial, CLIOption* CLIOptionArray, const uint32_t CLIOptionArrayLength) :
-	serial(serial),
-	CLIOptionArray(CLIOptionArray),
-	CLIOptionArrayLength(CLIOptionArrayLength) {
+void SimpleCLI::begin(Stream* serial, CLIOption* CLIOptionArray, const uint32_t CLIOptionArrayLength) {
 	// init ActiveCLIOptions
+	SimpleCLI::serial = serial;
+	SimpleCLI::CLIOptionArray = CLIOptionArray;
+	SimpleCLI::CLIOptionArrayLength = CLIOptionArrayLength;
+
 	resizeActiveOptionsArray(CLIOptionArrayLength);
 }
 

@@ -22,9 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#define SIMPLE_CLI_LOW_MEM      // for devices like arduino Uno where memory is a low resorce
-
-
 #include "SimpleCLI.h"
 
 void Function1(void* CLI) {
@@ -50,13 +47,11 @@ CLIOption CLIOptionArray[CLIOptionArrayLength] = {
 
 };
 
-
-SimpleCLI CLI(&Serial, CLIOptionArray, CLIOptionArrayLength);
-
-
+SimpleCLI CLI;
 
 void setup() {
     Serial.begin(115200);
+    CLI.begin(&Serial, CLIOptionArray, CLIOptionArrayLength);
 }
 
 void loop() {
