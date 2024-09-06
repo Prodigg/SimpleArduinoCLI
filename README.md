@@ -50,7 +50,7 @@ The CLI runns until the CLI is exited. In that time the Regular programm is **NO
 ## SimpleCLI Options
 
 In SimpleCLI every function you can execute vis SimpleCLI is a so called Option. These Options are stored in an CLIOption array. 
-An definistion of sutch an array may look like this: 
+An definition of such an array may look like this: 
 ```
 const uint32_t CLIOptionArrayLength = 3;
 CLIOption CLIOptionArray[CLIOptionArrayLength] = {
